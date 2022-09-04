@@ -10,12 +10,13 @@ const count = ref(0)
    <div class="borrow-info">
       <el-card class="box-card">
         <el-progress type="circle" 
-        :percentage="20" 
-         :stroke-width="10"
-            
-                                        :color="'red'"
-                                        backgroundColor="#f0f2f5"
-                                        :indeterminate="true">
+          class="process"
+          :percentage="20" 
+          :stroke-width="14"
+          :color="'red'"
+          width="208"
+          backgroundColor="#f0f2f5"
+          :indeterminate="true">
           <template #default="{  }">
            <p class="day">3天</p><p class="time">08:24:57</p>
           </template>
@@ -33,9 +34,28 @@ const count = ref(0)
 
 <style scoped lang="scss">
 .borrow-warp{
+  padding: 20px;
+  box-sizing: border-box;
   .borrow-info{
    .box-card{
      width: 400px;
+     border-radius: 20px;
+     text-align: center;
+     .process{
+       margin: 0 auto;
+     }
+      .bookMsg2{
+        margin-left: 25px;
+        margin-top: 15px;
+        h5{
+          margin-bottom: 8px;
+        }
+        p{
+           color: rgba(0,0,0,0.5);
+           margin-bottom: 8px;
+        }
+    }
+
    }
   }
 }
