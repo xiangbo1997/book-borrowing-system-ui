@@ -1,6 +1,6 @@
 <script  lang="ts">
-import { defineComponent, onBeforeMount, onMounted } from "vue";
-import { ArrowDown } from '@element-plus/icons-vue'
+import { defineComponent} from "vue";
+import { useRouter } from 'vue-router'
 interface TabList {
   path: string;
   label: string;
@@ -12,8 +12,11 @@ interface UserInfo {
   img: string;
 }
 
+
 export default defineComponent({
   setup() {
+    const router = useRouter()
+   
     const tabList: Array<TabList> = [
       {
         path: "/home",
@@ -43,10 +46,13 @@ export default defineComponent({
       img: '/src/assets/menu/images/headImg.jpg'
     }
     const methods = {
-      test(){
-        console.log(this.tabList)
-        this.tabList.push({label:111})
-      }
+        loginOut () {
+            console.log(11)
+
+          router.replace({
+            name:'login'
+          })
+       }
     }
     
 
@@ -66,19 +72,15 @@ export default defineComponent({
       <img src="@/assets/menu/images/logo.png" alt="">
       <span class="text">Books</span>
     </div>
-    <!-- <ul class="menu-item">
-      <li v-for="item in tabList" :key="item.id" @click="test">{{item.label}}</li>
-    </ul> -->
+ 
     <div class="user-info">
       <div class="user-img">
         <img :src="userInfo.img" alt="">
       </div>
-      <el-dropdown>
+      <el-dropdown @command="loginOut">
         <span class="el-dropdown-link">
           {{userInfo.userName}}
-          <el-icon class="el-icon--right">
-            <arrow-down />
-          </el-icon>
+         
         </span>
         <template #dropdown>
           <el-dropdown-menu>
@@ -86,7 +88,6 @@ export default defineComponent({
           </el-dropdown-menu>
         </template>
       </el-dropdown>
-      <!-- <div class="user-name">{{userInfo.userName}}</div> -->
 
     </div>
   </div>

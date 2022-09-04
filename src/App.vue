@@ -2,16 +2,15 @@
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
 import { ref } from 'vue';
-import HelloWorld from './components/HelloWorld.vue';
 import HeaderNav from './views/menu/Index.vue';
 import asideMenu from './views/asideMenu/Index.vue';
 
-const showHeader = ref<string[]> (['/home'])
+const showHeader = ref<string[]> (['home','books', 'borrow'])
 </script>
 
 <template>
   <div class="warp">
-     <el-container class="container" v-if="showHeader.includes($route.path)">
+     <el-container class="container" v-if="showHeader.includes($route.name)">
        <!-- 头部 -->
       <el-header class="header" >
           <header-nav></header-nav>
@@ -55,6 +54,8 @@ const showHeader = ref<string[]> (['/home'])
       // width: $mainWidth;
       height: $mainHeight;
       background-color: $mainbgcolor;
+      padding: 0;
+      box-sizing: border-box;
     }
   }
 }

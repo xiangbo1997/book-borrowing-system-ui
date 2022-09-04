@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import BookList from './componets/BookList.vue'
+import BookList from '../../components/BookList.vue'
 
 import { ref, reactive } from 'vue'
 import { Search, } from '@element-plus/icons-vue'
@@ -237,17 +237,10 @@ const handleClose = (done: () => void) => {
 
 <template>
 <div class="home-warp">
-
-  <!-- <div class="search">
-     <el-input
-        class="search"
-        v-model="input"
-        placeholder="请输入关键字/书名/书号/作者"
-        :suffix-icon="Search"
-      />
-    
-  </div> -->
   <div class="recommend">
+    <div class="bg">
+      <img src="@/assets/home/images/library.png" alt="">
+    </div>
     <div class="hot-books">
         <div  class="topTitle" >
           <div  >
@@ -258,28 +251,6 @@ const handleClose = (done: () => void) => {
                 alt="" ></a></div>
         </div>
         <book-list :booksList="booksList"></book-list>
-        <!-- <div  class="books-list">
-            <el-row :gutter="20">
-              <el-col :span="8"  v-for="item in booksList" :key="item.id">
-                  <div  class="book-item">
-                    <div class="book-cover"  >
-                      <img  src="@/assets/home/images/book1.jpg" alt="" />
-                    </div>
-                    <div  class="book-info">
-                      <h4 >{{item.name}}</h4>
-                      <p>{{item.category}}</p>
-                      <p>书号：{{item.position}}</p>
-                      <p>作者：{{item.author}}</p>
-                      <p>剩余：{{item.total}}</p>
-                    </div>
-                  </div>
-              </el-col>
-           
-
-            </el-row>
-        </div> -->
-   
-
     </div>
     <div class="activity">
          <div class="topTitle">
@@ -345,50 +316,29 @@ const handleClose = (done: () => void) => {
   width: 100%;
   height: 100%;
   position: relative;
-  .search{
-      width: 100%;
-      height: 120px;
-      position: relative;
-   
-      .search{
-        width: 90%;
-        margin: 0 auto;
-        height: 60px;
-        border-radius: 20px;
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-       ::v-deep .el-input__wrapper{
-          border-radius: 30px;
+  // padding-bottom: 20px;
 
-        }
-        ::v-deep.el-input__inner{
-          font-size: 18px;
-
-        }
-        ::v-deep .el-input__icon{
-            font-size: 22px;
-            margin-right: 10px;
-            cursor: pointer;
-        }
-       ::v-deep input::-webkit-input-placeholder { 
-          /* WebKit browsers，webkit内核浏览器 */
-          color: #ccc; 
-          font-size: 16px;
-        } 
-      }
-  }
   .recommend{
     width: 100%;
-    height: 760px;
+    height: 690px;
     overflow-y: auto;
+    
+  
+    .bg{
+      width: 100%;
+     
+      img{
+        width: 100%;
+       
+      }
+    }
 
     .hot-books{
       width: 90%;
       margin: 0 auto;
-      padding-bottom: 50px;
+        // padding: 20px;
       box-sizing: border-box;
+      padding-bottom: 50px;
       .topTitle{
         font-size: 32px;
         font-weight: 400;
@@ -400,39 +350,6 @@ const handleClose = (done: () => void) => {
         }
 
       }
-      // .books-list{
-      //   width: 100%;
-      //   overflow: hidden;
-      //   // display: flex;
-      //   //  flex-wrap: wrap;
-      //   // justify-content: space-between;
-      //   .book-item{
-      //     margin-top: 15px;
-      //     display: flex;
-
-      //     .book-cover{
-      //       width: 30%;
-      //       img{
-      //         width: 100%;
-      //         border-radius: 10px;
-      //         height: 180px;
-      //         cursor: pointer;
-      //       }
-
-      //     }
-      //     .book-info{
-      //       h4{
-      //         font-size: 20px;
-      //       }
-      //       margin-left: 20px;
-      //       p{
-      //         margin: 4px;
-      //         line-height: 30px;
-      //       }
-      //     }
-
-      //   }
-      // }
 
     }
     .activity{
@@ -464,15 +381,17 @@ const handleClose = (done: () => void) => {
            margin-bottom: 60px;
            display: flex;
            h4{
-             height: 50px;
-             line-height: 50px;
+            //  height: 50px;
+            //  line-height: 50px;
+            padding-bottom: 10px;
            }
            img{
+             width: 100%;
              border-radius: 10px;
              box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5)
            }
            p{
-             height: 30px;
+             height: 26px;
            }
           }
         }
@@ -481,15 +400,15 @@ const handleClose = (done: () => void) => {
   }
   .address{
     position: absolute;
-    bottom: -10px;
+    bottom: 0px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     align-items: center;
     justify-content: center;
     p{
-      height: 29px;
-      line-height: 29px;
+      height: 30px;
+      line-height: 30px;
       margin-right: 20px;
     }
   }

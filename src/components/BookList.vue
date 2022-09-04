@@ -69,7 +69,7 @@ const handleClose = (done: () => void) => {
     })
 }
 
-const getBookInfo = (id:(string) => void) => {
+const getBookInfo = (id:() => void) => {
   console.log(id);
   dialogVisible.value = true;
 
@@ -86,7 +86,7 @@ const handleChange = (value: number) => {
 <div class="list-warp">
   <div  class="books-list">
       <el-row :gutter="20">
-        <el-col :span="8"  v-for="item in booksList" :key="item.id">
+        <el-col :span="8"  v-for="item in booksList" :key="item.id" class="book-item-col">
             <div  class="book-item">
               <div class="book-cover"  >
                 <img  src="@/assets/home/images/book1.jpg" alt="" @click="getBookInfo(item.id)" />
@@ -105,7 +105,7 @@ const handleChange = (value: number) => {
   <el-dialog
     v-model="dialogVisible"
     title="图书详情"
-    width="48%"
+    width="60%"
   >
   <el-row :gutter="10" class="book-info-all"  >
       <el-col :span="10"  style="margin-bottom: 20px"><img :src="bookInfo.img" alt="" class="imgs"></el-col>
@@ -170,31 +170,36 @@ const handleChange = (value: number) => {
       // display: flex;
       //  flex-wrap: wrap;
       // justify-content: space-between;
-      .book-item{
-        margin-top: 15px;
-        display: flex;
+      .book-item-col{
+        min-width: 310px;
 
-        .book-cover{
-          width: 30%;
-          img{
-            width: 100%;
-            border-radius: 10px;
-            height: 180px;
-            cursor: pointer;
+        .book-item{
+          margin-top: 15px;
+          display: flex;
+
+          .book-cover{
+            width: 30%;
+            min-width: 108px;
+            img{
+              width: 100%;
+              border-radius: 10px;
+              height: 180px;
+              cursor: pointer;
+            }
+
+          }
+          .book-info{
+            h4{
+              font-size: 20px;
+            }
+            margin-left: 20px;
+            p{
+              // margin: 4px;
+              line-height: 26px;
+            }
           }
 
         }
-        .book-info{
-          h4{
-            font-size: 20px;
-          }
-          margin-left: 20px;
-          p{
-            margin: 4px;
-            line-height: 30px;
-          }
-        }
-
       }
   }
   .book-info-all{
