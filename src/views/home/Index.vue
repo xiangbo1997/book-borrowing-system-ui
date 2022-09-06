@@ -320,7 +320,8 @@ const handleClose = (done: () => void) => {
 
   .recommend{
     width: 100%;
-    height: 690px;
+    height: calc(100% - $contact-info-height);
+    // height: 690px;
     overflow-y: auto;
     
   
@@ -407,8 +408,8 @@ const handleClose = (done: () => void) => {
     align-items: center;
     justify-content: center;
     p{
-      height: 30px;
-      line-height: 30px;
+      height: $contact-info-height;
+      line-height: $contact-info-height;
       margin-right: 20px;
     }
   }

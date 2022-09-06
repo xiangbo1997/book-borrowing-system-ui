@@ -45,6 +45,10 @@ const showHeader = ref<string[]> (['home','books', 'borrow'])
       background-color: $navbgcolor;
 
     }
+    .el-container{
+      height: calc(100% - $navHeight);
+
+    }
     .aside{
       // width: $asideWidth;
       height: $asideHeight;
