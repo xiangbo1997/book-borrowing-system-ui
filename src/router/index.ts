@@ -24,6 +24,29 @@ const routes: Array<RouteRecordRaw> = [
     path: '/borrow',
     name: 'borrow',
     component: () => import('@/views/borrow/Index.vue')
+  },
+  {
+    path: '/personal',
+    name: 'personal',
+    component: () => import('@/views/personal/Index.vue')
+  },
+  {
+    path: '/operation/:id',
+    name: 'operation',
+    component: () => import('@/views/operation/Index.vue'),
+    children:[
+
+      {
+        path: 'account',
+        name: 'account',
+        component: () => import('@/views/operation/components/Account.vue')
+      },
+      {
+        path: 'booksManage',
+        name: 'booksManage',
+        component: () => import('@/views/operation/components/BookManage.vue')
+      },
+    ]
   }
 
 

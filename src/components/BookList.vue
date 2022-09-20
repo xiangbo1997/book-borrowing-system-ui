@@ -14,7 +14,7 @@ import { ElMessageBox } from 'element-plus'
 interface BooksList {
   name: string,
   category: string,
-  position:string,
+  position: string,
   author: string,
   total: number,
   id: string,
@@ -25,14 +25,14 @@ interface ActivityItem {
   name: string,
   ren: string,
   time: string,
-  position:string,
+  position: string,
   jianjie: string
 }
 
 interface BookInfo {
   name: string,
   category: string,
-  position:string,
+  position: string,
   author: string,
   total: number,
   remaining: number
@@ -53,7 +53,7 @@ const bookInfo = reactive<BookInfo>({
   img: '/src/assets/home/images/book1.jpg',
   name: '名利场',
   category: '文学类',
-  position:'1234/2342',
+  position: '1234/2342',
   author: '威廉·梅克比斯·萨克雷',
   total: 340,
   remaining: 4,
@@ -69,7 +69,7 @@ const handleClose = (done: () => void) => {
     })
 }
 
-const getBookInfo = (id:() => void) => {
+const getBookInfo = (id: () => void) => {
   console.log(id);
   dialogVisible.value = true;
 
@@ -83,143 +83,135 @@ const handleChange = (value: number) => {
 </script>
 
 <template>
-<div class="list-warp">
-  <div  class="books-list">
+  <div class="list-warp">
+    <div class="books-list">
       <el-row :gutter="20">
-        <el-col :span="8"  v-for="item in booksList" :key="item.id" class="book-item-col">
-            <div  class="book-item">
-              <div class="book-cover"  >
-                <img  src="@/assets/home/images/book1.jpg" alt="" @click="getBookInfo(item.id)" />
-              </div>
-              <div  class="book-info">
-                <h4 >{{item.name}}</h4>
-                <p>{{item.category}}</p>
-                <p>书号：{{item.position}}</p>
-                <p>作者：{{item.author}}</p>
-                <p>剩余：{{item.total}}</p>
-              </div>
+        <el-col :span="8" v-for="item in booksList" :key="item.id" class="book-item-col">
+          <div class="book-item">
+            <div class="book-cover">
+              <img src="@/assets/home/images/book1.jpg" alt="" @click="getBookInfo(item.id)" />
             </div>
+            <div class="book-info">
+              <h4>{{item.name}}</h4>
+              <p>{{item.category}}</p>
+              <p>书号：{{item.position}}</p>
+              <p>作者：{{item.author}}</p>
+              <p>剩余：{{item.total}}</p>
+            </div>
+          </div>
         </el-col>
       </el-row>
-  </div>
-  <el-dialog
-    v-model="dialogVisible"
-    title="图书详情"
-    width="60%"
-  >
-  <el-row :gutter="10" class="book-info-all"  >
-      <el-col :span="10"  style="margin-bottom: 20px"><img :src="bookInfo.img" alt="" class="imgs"></el-col>
-      <el-col :span="14" >
+    </div>
+    <el-dialog v-model="dialogVisible" title="图书详情" width="60%">
+      <el-row :gutter="10" class="book-info-all">
+        <el-col :span="10" style="margin-bottom: 20px"><img :src="bookInfo.img" alt="" class="imgs"></el-col>
+        <el-col :span="14">
           <h4>{{bookInfo.name}}</h4>
           <p style="margin: 4px">{{bookInfo.category}}类</p>
           <p style="margin: 4px">书号：{{bookInfo.position}}</p>
           <p style="margin: 4px">作者：{{bookInfo.author}}</p>
           <p style="margin: 4px">剩余：{{bookInfo.remaining}}</p>
           <p style="margin: 4px">简介：{{bookInfo.introduction}}</p>
-      </el-col>
-       <!-- <div class="jssh">
-          <el-input-number
-            v-model="num"
-            :min="1"
-            :max="10"
-            controls-position="right"
-            size="large"
-            @change="handleChange"
-           />
+        </el-col>
 
-       </div> -->
-      <!-- <el-input-group style="margin: 0px 16px;display: -webkit-box;">
-
-          <el-form-input type="number" min="1.00" style="border-radius: 0.25rem;" v-model="day"></el-form-input>
-
-          <el-input-group-append>
-              <p style="    margin: 0px;width: 74px;height: calc(2.5em + 0.75rem + 8px);color: #070707;position: absolute;right: 98px;z-index: 10;text-align: center;line-height: calc(2.5em + 0.75rem + 8px);">天</p>
-              <el-button variant="info" block  @click="lendBook()">借用书籍</el-button>
-          </el-input-group-append>
-      </el-input-group> -->
-
-  </el-row>
-    <template #footer>
+      </el-row>
+      <template #footer>
         <div class="jssh">
-          <el-input-number
-            v-model="num"
-            :min="1"
-            :max="10"
-            controls-position="right"
-            size="large"
-            @change="handleChange"
-           />
-
-       </div>
-    </template>
-  </el-dialog>
-</div>
+          <span>借阅天数： </span>
+          <el-input-number v-model="num" :min="1" :max="10" controls-position="left" size="large"
+            @change="handleChange" />
+            <el-button  size="large">取消借阅</el-button>
+            <el-button type="primary" size="large">开始借阅</el-button>
+        </div>
+      </template>
+    </el-dialog>
+  </div>
 
 </template>
 
 
 <style scoped lang="scss">
-
 .list-warp {
   width: 100%;
   height: 100%;
   position: relative;
-  .books-list{
-      width: 100%;
-      overflow: hidden;
-      // display: flex;
-      //  flex-wrap: wrap;
-      // justify-content: space-between;
-      .book-item-col{
-        min-width: 310px;
 
-        .book-item{
-          margin-top: 15px;
-          display: flex;
+  .books-list {
+    width: 100%;
+    overflow: hidden;
 
-          .book-cover{
-            width: 30%;
-            min-width: 108px;
-            img{
-              width: 100%;
-              border-radius: 10px;
-              height: 180px;
-              cursor: pointer;
-            }
+    // display: flex;
+    //  flex-wrap: wrap;
+    // justify-content: space-between;
+    .book-item-col {
+      min-width: 310px;
 
-          }
-          .book-info{
-            h4{
-              font-size: 20px;
-            }
-            margin-left: 20px;
-            p{
-              // margin: 4px;
-              line-height: 26px;
-            }
+      .book-item {
+        margin-top: 15px;
+        display: flex;
+
+        .book-cover {
+          width: 30%;
+          min-width: 108px;
+
+          img {
+            width: 100%;
+            border-radius: 10px;
+            height: 180px;
+            cursor: pointer;
           }
 
         }
+
+        .book-info {
+          h4 {
+            font-size: 20px;
+          }
+
+          margin-left: 20px;
+
+          p {
+            // margin: 4px;
+            line-height: 26px;
+          }
+        }
+
       }
+    }
   }
-  .book-info-all{
+
+  .book-info-all {
     display: flex;
     margin-top: 15px;
     flex-wrap: wrap;
     font-family: 微软雅黑;
-    img{
+
+    img {
       width: 100%;
     }
-    h4{
+
+    h4 {
       font-size: 26px;
       font-weight: bold;
 
     }
-    p{
+
+    p {
       margin: 4px;
       font-size: 18px;
       line-height: 30px;
     }
+  }
+  .jssh{
+    span{
+      color: rgb(9, 166, 210);
+      font-size: 18px;
+    }
+    .el-button{
+      margin-left: 15px;
+
+    }
+
   }
 }
 </style>

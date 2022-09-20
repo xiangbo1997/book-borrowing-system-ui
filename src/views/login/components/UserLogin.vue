@@ -3,6 +3,7 @@
 import { reactive, ref } from 'vue'
 import type { FormInstance, FormRules } from 'element-plus'
 import { View, Hide } from '@element-plus/icons-vue'
+import { isvalidatePassword } from '@/utils/tool'
 interface UserInfo {
   username: string,
   password: string,
@@ -28,15 +29,21 @@ const ruleForm = reactive<UserInfo>({
   password:'',
   authCode: ''
 })
-
+const validatePassword = (rule: any, value: any, callback: any) => {
+    if (!isvalidatePassword(value)) {
+      callback(new Error(isvalidatePassword(value)));
+    } else {
+      callback();
+    }
+  }
 const rules = reactive<FormRules>({
   username: [
     { required: true, message: '请输入用户名', trigger: 'blur' },
     { min: 5, max: 12, message: '用户名长度应为5-12', trigger: 'blur' },
   ],
   password: [
-    { required: true, message: '请输入密码', trigger: 'blur' },
-    { min: 8,  message: '密码至少为8位', trigger: 'blur' },
+    { required: true, trigger: 'blur', validator: validatePassword },
+
   ],
   authCode: [
     { required: false, message: '请输入验证码', trigger: 'blur' },

@@ -5,7 +5,7 @@ import { ref } from 'vue';
 import HeaderNav from './views/menu/Index.vue';
 import asideMenu from './views/asideMenu/Index.vue';
 
-const showHeader = ref<string[]> (['home','books', 'borrow'])
+const showHeader = ref<string[]> (['home','books', 'borrow', 'personal', 'operation', 'booksManage', 'account'])
 </script>
 
 <template>

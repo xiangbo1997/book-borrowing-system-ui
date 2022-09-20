@@ -10,6 +10,7 @@ import {
   ChatDotRound
 } from '@element-plus/icons-vue'
 import { Settings } from 'http2'
+import path from 'path';
 
 const router = useRouter()
 // const route = useRoute()
@@ -17,7 +18,8 @@ const router = useRouter()
 interface MenuItem{
   name:string,
   id:string,
-  code:string
+  code:string,
+  path: string
 }
 
 const handleOpen = (key: string, keyPath: string[]) => {
@@ -26,8 +28,8 @@ const handleOpen = (key: string, keyPath: string[]) => {
 const handleClose = (key: string, keyPath: string[]) => {
   console.log(key, keyPath)
 }
-const gotToPage = (code: string) => {
-  router.push({name:code})
+const gotToPage = (path: string) => {
+  router.push({path:path})
 
 }
 const isCollapse = ref(false)
@@ -36,27 +38,32 @@ const menuList =reactive<MenuItem[]> ([
   {
     name: '首页',
     id:'1',
-    code:'home'
+    code:'home',
+    path: '/home'
   },
   {
     name: '图书书库',
     id:'2',
-    code:'books'
+    code:'books',
+    path: '/books'
   },
   {
     name: '借阅信息',
     id:'3',
-    code:'borrow'
+    code:'borrow',
+    path: '/borrow'
   },
   {
     name: '个人中心',
     id:'4',
-    code:'personal'
+    code:'personal',
+    path: '/personal'
   },
   {
     name: '运维管理',
     id:'5',
-    code:'operation'
+    code:'operation',
+    path: '/operation/account/account'
   }
 ])
 
@@ -70,7 +77,7 @@ const menuList =reactive<MenuItem[]> ([
        @close="handleClose"
        :collapse="isCollapse"
         >
-          <el-menu-item  v-for="item in menuList" :index="item.id" :key="item.id" @click="gotToPage(item.code)">
+          <el-menu-item  v-for="item in menuList" :index="item.id" :key="item.id" @click="gotToPage(item.path)">
               <el-icon v-if="item.code === 'home'"><location /></el-icon>
               <el-icon v-if="item.code === 'books'"><icon-menu /></el-icon>
               <el-icon v-if="item.code === 'borrow'"><ChatDotRound /></el-icon>

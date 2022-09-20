@@ -2,6 +2,7 @@
 import { ref ,reactive} from 'vue'
 import {Search} from '@element-plus/icons-vue'
 import BookList from '../../components/BookList.vue'
+import { getBookList} from '@/api'
 
 interface BooksList {
   name: string,
@@ -14,7 +15,14 @@ interface BooksList {
 }
 interface BookType {
   key: string,
- 
+  label: string
+}
+interface BookArea {
+  key: string,
+  label: string
+}
+interface BookYear {
+  key: string,
   label: string
 }
 const input = ref('')
@@ -233,6 +241,37 @@ const bookType = reactive<BookType[]>([
   },
 ])
 
+const bookArea = reactive<BookArea[]>([
+  {
+    key: 'all',
+    label: '全部'
+  },
+  {
+    key: 'china',
+    label: '中国'
+  },
+])
+const bookYear = reactive<BookYear[]>([
+  {
+    key: 'all',
+    label: '全部'
+  },
+  {
+    key: '2022',
+    label: '2022'
+  },
+  {
+    key: '2021',
+    label: '2021'
+  },
+  {
+    key: '2020',
+    label: '2020'
+  },
+
+])
+
+
 const changeType = (key:string) => {
   currentType.value = key
 }
@@ -242,6 +281,11 @@ const changeArea = (key:string) => {
 const changeYear = (key:string) => {
   currentYear.value = key
 }
+getBookList({id:124})
+.then((res:any) => {
+  console.log(res)
+})
+.catch(()=>{})
 </script>
 
 <template>
@@ -266,13 +310,13 @@ const changeYear = (key:string) => {
     <div class="area menu-item">
       <span>地区：</span>
       <ul>
-        <li v-for="item in bookType" :key="item.key" :class="{'active-area': currentArea === item.key}" @click="changeArea(item.key)">{{item.label}}</li>
+        <li v-for="item in bookArea" :key="item.key" :class="{'active-area': currentArea === item.key}" @click="changeArea(item.key)">{{item.label}}</li>
       </ul>
     </div>
     <div class="year menu-item">
       <span>年份：</span>
       <ul>
-        <li v-for="item in bookType" :key="item.key" :class="{'active-year': currentYear === item.key}" @click="changeYear(item.key)">{{item.label}}</li>
+        <li v-for="item in bookYear" :key="item.key" :class="{'active-year': currentYear === item.key}" @click="changeYear(item.key)">{{item.label}}</li>
       </ul>
     </div>
   </div>
@@ -327,6 +371,7 @@ const changeYear = (key:string) => {
     width: 90%;
     margin: 0 auto;
     background: #fff;
+    padding: 10px 0px;
     .menu-item{
       display: flex;
       span{

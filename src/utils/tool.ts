@@ -53,3 +53,23 @@
 }
 
 
+/**
+ * 监测密码
+ */
+ export function isvalidatePassword(password:string):any{
+
+  const passwordText = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,}$/;
+  let msg: string = '';
+  if(!validateNull(password)){
+    if(!passwordText.test(password)){
+      msg = '请输入包含字母和数字且不少于8位的密码'
+    }
+
+  } else{
+    msg = '密码不能为空' 
+  }
+  // 增加134 减少|1349[0-9]{7}，增加181,增加145，增加17[678]
+
+  return msg;
+}
+
